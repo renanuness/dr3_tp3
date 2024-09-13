@@ -8,6 +8,7 @@ import {
 import Login from "./pages/login";
 import Register from "./pages/register";
 import { AuthProvider, useAuth } from "./contexts/authContext.jsx";
+import Header from "./components/Header/index.jsx";
 
 const PrivateRoute = ({ children }) => {
   const { isLogged } = useAuth();
@@ -27,7 +28,7 @@ function App() {
             path="/"
             element={
               <PrivateRoute>
-                <h1>Deu certo!</h1>
+                <Header />
               </PrivateRoute>
             }
           />

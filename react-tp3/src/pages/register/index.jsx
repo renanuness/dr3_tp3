@@ -2,14 +2,23 @@ import { registerSchema } from "../../validations/userValidation";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/authContext";
+import { useEffect } from "react";
 
 export default function Register() {
+  const { isLogged } = useAuth();
   const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: yupResolver(registerSchema) });
+
+  useEffect(() => {
+    if (isLogged) {
+      navigate("/");
+    }
+  }, []);
 
   const registerUser = (data) => {
     return new Promise((resolve) => {
@@ -21,11 +30,11 @@ export default function Register() {
 
   const onSubmit = async (data) => {
     try {
-      const response = await registerUser(data); // Chama a função de registro mockada
+      const response = await registerUser(data);
 
       if (response === "success") {
         alert("Cadastro realizado com sucesso!");
-        navigate("/login"); // Redireciona para a página de login após sucesso
+        navigate("/login");
       } else {
         alert("Erro ao realizar cadastro.");
       }

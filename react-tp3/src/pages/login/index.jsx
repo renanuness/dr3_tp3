@@ -2,34 +2,28 @@ import { loginSchema } from "../../validations/userValidation";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/authContext";
+import { useEffect } from "react";
 
 export default function Login() {
+  const { login, isLogged } = useAuth();
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: yupResolver(loginSchema) });
 
-  const verifyUserCredentials = (email, password) => {
-    if (
-      email === "corinthians123@gmail.com" &&
-      password === "vaicurintia123!"
-    ) {
-      return "success";
-    } else {
-      return "fail";
-    }
+  const onSubmit = async (data) => {
+    await login(data);
   };
 
-  const onSubmit = (data) => {
-    const response = verifyUserCredentials(data.email, data.password); //seria feito assim caso estivesse utilizando uma API real.
-
-    if (response === "success") {
-      alert("Login realizado com sucesso.");
-    } else {
-      alert("Erro ao realizar login.");
+  useEffect(() => {
+    if (isLogged) {
+      navigate("/");
     }
-  };
+  }, []);
 
   return (
     <div>
