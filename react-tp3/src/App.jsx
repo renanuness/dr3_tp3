@@ -14,6 +14,9 @@ import ForgotPassword from "./pages/forgot-password/index.jsx";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Products from "./pages/products/index.jsx";
+import ProductDetail from "./pages/productDetail/index.jsx";
+import EditProduct from "./pages/editProduct/index.jsx";
 
 const PrivateRoute = ({ children }) => {
   const { isLogged } = useAuth();
@@ -48,6 +51,33 @@ function App() {
               </PrivateRoute>
             }
           />
+
+          <Route
+            path="/products"
+            element={
+              <PrivateRoute>
+                <Products/>
+              </PrivateRoute>
+            }
+            />
+
+          <Route
+            path="/productDetail/:id"
+            element={
+              <PrivateRoute>
+                <ProductDetail/>
+              </PrivateRoute>
+            }
+            />
+
+          <Route
+            path="/editProduct/:id"
+            element={
+              <PrivateRoute>
+                <EditProduct/>
+              </PrivateRoute>
+            }
+            />
         </Routes>
       </AuthProvider>
     </Router>
