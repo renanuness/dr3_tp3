@@ -1,6 +1,8 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { toast } from "react-toastify";
+
 const AuthContext = createContext();
 
 export const useAuth = () => useContext(AuthContext);
@@ -22,7 +24,7 @@ export const AuthProvider = ({ children }) => {
       localStorage.setItem("@user", JSON.stringify(userData));
       navigate("/");
     } else {
-      alert("Erro na autenticação");
+      toast.error("Erro na autenticação");
     }
   };
 
@@ -52,7 +54,7 @@ export const AuthProvider = ({ children }) => {
     })
       .then((res) => res.json())
       .then(console.log)
-      .catch((e) => alert("Erro ao atualizar os dados do usuário."));
+      .catch((e) => toast.error("Erro ao atualizar os dados do usuário."));
   };
 
   const value = {

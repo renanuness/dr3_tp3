@@ -4,6 +4,8 @@ import { loginSchema } from "../../validations/userValidation";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect } from "react";
 
+import { toast } from "react-toastify";
+
 export default function UserInfo() {
   const { getUserInfo, updateUserInfo } = useAuth();
   const {
@@ -24,9 +26,9 @@ export default function UserInfo() {
   const onSubmit = async (data) => {
     try {
       await updateUserInfo(data);
-      alert("Informações atualizadas com sucesso!");
+      toast.success("Informações atualizadas com sucesso!");
     } catch (error) {
-      alert("Erro ao atualizar as informações.");
+      toast.error("Erro ao atualizar as informações.");
     }
   };
 
@@ -45,6 +47,8 @@ export default function UserInfo() {
 
         <button>Enviar</button>
       </form>
+
+      <ToastContainer />
     </div>
   );
 }

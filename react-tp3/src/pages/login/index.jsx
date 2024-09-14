@@ -43,6 +43,10 @@ export default function Login() {
 
         <input type="submit" value={"Enviar"} />
       </form>
+
+      <button onClick={() => navigate("/forgot-password")}>
+        Esqueci minha senha
+      </button>
     </div>
   );
 }

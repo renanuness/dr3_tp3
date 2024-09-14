@@ -10,6 +10,10 @@ import Register from "./pages/register";
 import { AuthProvider, useAuth } from "./contexts/authContext.jsx";
 import Header from "./components/Header/index.jsx";
 import UserInfo from "./pages/user-info/index.jsx";
+import ForgotPassword from "./pages/forgot-password/index.jsx";
+
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const PrivateRoute = ({ children }) => {
   const { isLogged } = useAuth();
@@ -20,10 +24,12 @@ const PrivateRoute = ({ children }) => {
 function App() {
   return (
     <Router>
+      <ToastContainer />
       <AuthProvider>
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
 
           <Route
             path="/"
