@@ -9,6 +9,7 @@ import Login from "./pages/login";
 import Register from "./pages/register";
 import { AuthProvider, useAuth } from "./contexts/authContext.jsx";
 import Header from "./components/Header/index.jsx";
+import UserInfo from "./pages/user-info/index.jsx";
 
 const PrivateRoute = ({ children }) => {
   const { isLogged } = useAuth();
@@ -29,6 +30,15 @@ function App() {
             element={
               <PrivateRoute>
                 <Header />
+              </PrivateRoute>
+            }
+          />
+
+          <Route
+            path="/user-info"
+            element={
+              <PrivateRoute>
+                <UserInfo />
               </PrivateRoute>
             }
           />

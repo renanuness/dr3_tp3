@@ -32,11 +32,36 @@ export const AuthProvider = ({ children }) => {
     navigate("/login");
   };
 
+  const getUserInfo = () => {
+    if (user) {
+      const { email, password } = user;
+      return { email, password };
+    }
+    return { email: "", password: "" };
+  };
+
+  const updateUserInfo = (userData) => {
+    setUser(userData);
+    localStorage.setItem("@user", JSON.stringify(userData));
+    fetch("https://dummyjson.com/users/2", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        userData,
+      }),
+    })
+      .then((res) => res.json())
+      .then(console.log)
+      .catch((e) => alert("Erro ao atualizar os dados do usuário."));
+  };
+
   const value = {
     user,
     login,
     logout,
     isLogged: !!user,
+    getUserInfo,
+    updateUserInfo,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
