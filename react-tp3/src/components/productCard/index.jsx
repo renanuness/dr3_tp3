@@ -5,13 +5,13 @@ export default function ProductCard(props){
     const product = props.product;
 
     function setFavorite(){
-        let saved = localStorage.getItem('saved');
+        let saved = JSON.parse(localStorage.getItem('saved'));
         if(saved == null){
             saved = [];
         }
 
         saved.push(product.id);
-        localStorage.setItem('saved', saved);
+        localStorage.setItem('saved', JSON.stringify(saved));
     }
 
     return (
