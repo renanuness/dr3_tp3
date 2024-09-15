@@ -16,13 +16,15 @@ export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
 
   const login = (userData) => {
+    console.log(userData);
     if (
-      userData.email === "corinthians123@gmail.com" &&
-      userData.password === "vaicurintia123!"
+      (userData.email === "corinthians123@gmail.com" &&
+      userData.password === "vaicurintia123!") ||
+      (userData.email === "admin@gmail.com" && userData.password == "123456")
     ) {
       setUser(userData);
       localStorage.setItem("@user", JSON.stringify(userData));
-      navigate("/");
+      navigate("/products");
     } else {
       toast.error("Erro na autenticação");
     }
