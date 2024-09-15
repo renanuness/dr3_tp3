@@ -13,6 +13,7 @@ export default function Products(){
     const [products, setProducts] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [canLoad, setCanLoad] = useState(true);
+    const [saved, setSaved] = useState([]);
 
     useEffect(()=>{
         getProducts(1, pageSize).then(res=>{
@@ -23,6 +24,10 @@ export default function Products(){
                 setCanLoad(true);
             }
         });
+
+        let s = JSON.parse(localStorage.getItem('saved'));
+        console.log(s);
+        setSaved(s);
     }, []);
 
     function filter(value){
@@ -52,7 +57,7 @@ export default function Products(){
             <ProductFilter filter={(v)=>filter(v)} />
             <div className="flex flex-wrap gap-2 p-4 justify-center">
             {products.map(product =>
-                <ProductCard key={product.id} product={product} productDetail={(id)=>navigate('/productDetail/'+id)}/>
+                <ProductCard key={product.id} product={product} saved={()=>{saved.includes(product.id)}} productDetail={(id)=>navigate('/productDetail/'+id)}/>
             )}
             </div>
             { 

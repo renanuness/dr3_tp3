@@ -70,9 +70,9 @@ export default function ProductDetail() {
             <p>R$ {product.price}</p>
             <div className="flex flex-col items-start justify-center">
                 <p>Avaliações</p>
-                {product.reviews?.map((review) => {
+                {product.reviews?.map((review, index) => {
                     return (
-                        <div className="border">
+                        <div key={index} className="border">
                             <p>{review.reviewerName}</p>
                             <p>{review.rating}</p>
                             <p>{review.comment}</p>

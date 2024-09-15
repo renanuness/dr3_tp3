@@ -17,6 +17,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Products from "./pages/products/index.jsx";
 import ProductDetail from "./pages/productDetail/index.jsx";
 import EditProduct from "./pages/editProduct/index.jsx";
+import Saved from "./pages/saved/index.jsx";
 
 const PrivateRoute = ({ children }) => {
   const { isLogged } = useAuth();
@@ -56,6 +57,7 @@ function App() {
             path="/products"
             element={
               <PrivateRoute>
+                <Header />
                 <Products/>
               </PrivateRoute>
             }
@@ -65,6 +67,7 @@ function App() {
             path="/productDetail/:id"
             element={
               <PrivateRoute>
+                <Header />
                 <ProductDetail/>
               </PrivateRoute>
             }
@@ -74,7 +77,18 @@ function App() {
             path="/editProduct/:id"
             element={
               <PrivateRoute>
+                <Header />
                 <EditProduct/>
+              </PrivateRoute>
+            }
+            />
+
+          <Route
+            path="/saved"
+            element={
+              <PrivateRoute>
+                <Header />
+                <Saved/>
               </PrivateRoute>
             }
             />

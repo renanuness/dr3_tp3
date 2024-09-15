@@ -14,7 +14,14 @@ export default function Header() {
   };
 
   return (
-    <header className="flex justify-end">
+    <header className="flex justify-between p-3 border">
+      <nav className="flex flex-row">
+        <ul className="flex flex-row gap-5">
+          <li className="border bg-orange-200 p-3 hover:cursor-pointer" onClick={()=>navigate("/saved")}>Favoritos</li>
+          <li className="border bg-orange-200 p-3 hover:cursor-pointer" onClick={()=>navigate("/products")}>Produtos</li>
+          <li className="border bg-orange-200 p-3 hover:cursor-pointer" onClick={()=>navigate("/user-info")}>Perfil de Usuário</li>
+        </ul>
+      </nav>
       <button onClick={handleButtonClick}>
         {isLogged ? "Logout" : "Login"}
       </button>
